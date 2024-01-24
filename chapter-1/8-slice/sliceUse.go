@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 
@@ -44,4 +46,41 @@ func main() {
 	s5[1] = 111
 	fmt.Printf("s5 = %d，slice2 = %d\n", s5, slice2)
 
+	s6 := []int{1, 5, 2, 4}
+	s6 = SliceCopy(s6, 5)
+	// SliceCopy(s6, 5)
+	fmt.Println(s6)
+	s6 = SliceMove(s6, 4)
+	// SliceMove(s6, 4)
+	fmt.Println(s6)
+
+}
+
+// 3.切片的删除
+// 虽然没有提供语法或函数，但可以根据切片的特性实现对切片中的元素进行删除
+
+// Ⅰ.拷贝法：不会对原切片产生影响（指的是不会影响原切片的底层数组），可能会导致额外的内存分配
+// a表示要删除的元素
+func SliceCopy(slice []int, a int) []int {
+	temp := make([]int, 0, len(slice)) //将容量设为原切片的长度，这样就不会有多余的0
+	for _, v := range slice {
+		if v != a {
+			temp = append(temp, v)
+		}
+	}
+
+	return temp
+}
+
+// Ⅱ.移位法：对原切片产生影响，不会产生额外内存分配
+func SliceMove(slice []int, a int) []int {
+	j := 0
+	for _, v := range slice {
+		if v != a {
+			slice[j] = v
+			j++
+		}
+	}
+
+	return slice[:j]
 }
