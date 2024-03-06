@@ -11,7 +11,7 @@ type AnimalIf interface {
 	GetColor() string
 }
 
-// 2.定义一个实现了父类接口所有方法的子类
+// 2.定义一个实现了父类接口所有方法的子结构体
 type Cat struct {
 	Color string
 }
